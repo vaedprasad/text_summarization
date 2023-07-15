@@ -5,12 +5,30 @@ from os import environ as env
 from src.summarize import summarize_text
 
 
+description = """
+### Model
+
+You can view which text summarization model is being leveraged using `/model`.
+
+### Tokenizer
+
+You can view which text summarization tokenizer is being leveraged using `/tokenizer`.
+
+### Summarization
+
+You can summarize an input text using `/summarize`. This endpoint generates a summary 
+for the given text while applying a maximum length and excluded words constraint. 
+Due to the specifications of the model, `summary_length > 56`.
+"""
+
+
 app = FastAPI(
-    title="Text Sumarization Service",
+    title="Rad Text Sumarization Service",
     version="1.0.0",
+    description=description,
     contact={
         "name": "Vaed Prasad",
-        "email": "vaedprasad[at]gmail[dot]com",
+        "email": "vaedprasad@gmail.com",
     },
 )
 
@@ -24,9 +42,10 @@ class TextRequest(BaseModel):
 
     Attributes:
         text (str): The input text to be summarized.
-        summary_length (int): The desired length (in tokens) of the summary. 
+        summary_length (int): The desired length (in tokens) of the summary.
         exclude_words (List[str]): A list of words to be excluded from the generated summary.
     """
+
     text: str
     summary_length: int
     exclude_words: List[str]
@@ -41,7 +60,6 @@ async def get_model() -> Dict[str, str]:
         Dict[str, str]: A dictionary containing the model name.
     """
     return {"model": env["MODEL"]}
-
 
 
 @app.get("/tokenizer")
@@ -68,10 +86,8 @@ async def summarize_text_request(text_request: TextRequest) -> Dict[str, str]:
     """
     text_request_dict = text_request.model_dump()
     summary = summarize_text(
-        text=text_request_dict["text"], 
-        summary_length=text_request_dict["summary_length"], 
-        exclude_words=text_request_dict["exclude_words"]
+        text=text_request_dict["text"],
+        summary_length=text_request_dict["summary_length"],
+        exclude_words=text_request_dict["exclude_words"],
     )
-    return {
-        "summary" : summary
-    }
+    return {"summary": summary}
