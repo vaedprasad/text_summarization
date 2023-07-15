@@ -9,7 +9,7 @@
 	- `cd ~/text_summarization`
 	
 3. Build images and start containers
-	- `docker compose up --build` (If you do not have Docker installed, install [here](https://docs.docker.com/get-docker/)
+	- `docker compose up --build` (Install Docker [here](https://docs.docker.com/get-docker/) if you do not already have it installed)
 	- Wait for building to complete (Est. 20 - 30 seconds)
  	- Wait for application to launch (You should see `Application startup complete.` in your terminal)
 	
