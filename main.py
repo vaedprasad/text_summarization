@@ -5,7 +5,14 @@ from os import environ as env
 from src.summarize import summarize_text
 
 
-app = FastAPI()
+app = FastAPI(
+    title="Text Sumarization Service",
+    version="1.0.0",
+    contact={
+        "name": "Vaed Prasad",
+        "email": "vaedprasad[at]gmail[dot]com",
+    },
+)
 
 
 class TextRequest(BaseModel):
