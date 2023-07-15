@@ -9,8 +9,9 @@
 	- `cd ~/text_summarization`
 	
 3. Build images and start containers
-	- `docker compose up --build`
+	- `docker compose up --build` (If you do not have Docker installed, install [here](https://docs.docker.com/get-docker/)
 	- Wait for building to complete (Est. 20 - 30 seconds)
+ 	- Wait for application to launch (You should see `Application startup complete.` in your terminal)
 	
 4. Open FastAPI Application on Browser
 	- Navigate to `http://127.0.0.1:8000/docs` on a preferred browser
